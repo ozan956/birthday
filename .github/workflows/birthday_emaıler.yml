@@ -1,0 +1,28 @@
+name: Birthday Mailer
+
+on:
+  schedule:
+    - cron: '0 5 * * *'  # UTC 05:00 = Türkiye 08:00
+  workflow_dispatch:
+
+jobs:
+  send-birthday-emails:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Kodları çek
+      uses: actions/checkout@v3
+
+    - name: Python kurulumu
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Gerekli kütüphaneleri yükle
+      run: pip install pandas
+
+    - name: Doğum günü e-postalarını gönder
+      env:
+        EMAIL: ${{ secrets.EMAIL }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      run: python birthday_bot.py
