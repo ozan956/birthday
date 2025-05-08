@@ -7,7 +7,7 @@ import os
 EMAIL = os.getenv("EMAIL")
 PASSWORD = os.getenv("EMAIL_PASSWORD")
 
-df = pd.read_csv("birthdays.csv")
+df = pd.read_csv("birthday.csv")
 today = datetime.now().strftime("%m-%d")
 
 for _, row in df.iterrows():
